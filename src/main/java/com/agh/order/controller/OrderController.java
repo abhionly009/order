@@ -30,11 +30,8 @@ public class OrderController {
     public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderInfo orderRequest){
 
         OrderInfo placedOrder = orderService.placeOrder(orderRequest);
-
-        System.out.println(placedOrder);
         OrderResponse orderResponse = new OrderResponse();
         orderResponse.mapToResponse(placedOrder);
-        System.out.println(orderResponse);
         return ResponseEntity.ok(orderResponse);
 
     }

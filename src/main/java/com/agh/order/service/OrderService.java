@@ -20,17 +20,18 @@ public class OrderService {
     }
 
     public OrderInfo placeOrder(OrderInfo order){
+        OrderInfo save = orderRepository.save(order);
 
         OrderCreatedEvent event = new OrderCreatedEvent();
-        event.setOrderId(order.getOrderId());
-        event.setProductId(order.getProductId());
-        event.setUserId(order.getUserId());
-        event.setQuantity(order.getQuantity());
-        event.setPrice(order.getPrice());
+        event.setProductId(save.getProductId());
+        event.setUserId(save.getUserId());
+        event.setQuantity(save.getQuantity());
+        event.setOrderId(save.getOrderId());
+        event.setType("DEBIT");
+        event.setPrice(save.getPrice());
 
         orderEventProducer.publishOrderCreated(event);
-
-        return orderRepository.save(order);
+        return save;
     }
 
     public OrderInfo getOrder(long orderId){

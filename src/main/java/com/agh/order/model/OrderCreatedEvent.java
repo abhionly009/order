@@ -8,6 +8,16 @@ public class OrderCreatedEvent {
     private int quantity;
     private double price;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
+
     public Long getOrderId() {
         return orderId;
     }
